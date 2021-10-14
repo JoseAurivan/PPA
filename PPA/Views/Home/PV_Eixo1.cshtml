@@ -1,0 +1,24 @@
+﻿@model OpiniaoViewModel
+<div class="card" >
+            <h5 class="card-header">Desenvolvimento de Social e Humanização</h5>
+            <div class="form-row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Escolha um tema:</label>
+                <div class="col-sm-8">
+                    <select asp-for="Topico" required class="form-select form-control">
+                        <option value="1109-EducacaoSustentavel-Educacao">EDUCAÇÃO SUSTENTÁVEL</option>
+                        <option value="1110-SaudePublicaESustentavel-Saude">SAÚDE PÚBLICA E SUSTENTAVEL</option>
+                        <option value="1111-AssistenciaSocialParticipativa-AssistenciaSocialEInclusaoSocialEDefesaDosDireitosHumanos">ASSITÊNCIA SOCIAL PARTICIPATIVA</option>
+                        <option value="1112-PortoCidadeSegura-SegurancaCidada">PORTO CIDADE SEGURA</option>
+                        <option value="0003-CulturaParaTodos-Cultura">CULTURA PARA TODOS</option>
+                        <option value="0004-PortoJovem-Juventude">PORTO JOVEM</option>
+                        <option value="1158-EsporteParaTodos-EsporteELazer">ESPORTE PARA TODOS</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Opinião</label>
+                <div class="col-sm-10">
+                    <textarea asp-for="Opiniao" class="form-control" cols="4" rows="3"></textarea>
+                </div>
+            </div>
+        </div>

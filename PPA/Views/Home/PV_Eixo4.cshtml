@@ -1,0 +1,22 @@
+﻿@model OpiniaoViewModel
+<div class="card" >
+            <h5 class="card-header">Desenvolvimento Urbano e Sustentabilidade</h5>
+            <div class="form-row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Escolha um tema:</label>
+                <div class="col-sm-8">
+                    <select asp-for="Topico" required class="form-select form-control">
+                        <option value="1118-InfraestruturaTransformadora-Infraestrutura">INFRAESTRUTURA TRANSFORMADORA</option>
+                        <option value="1119-CidadeAcessivel-MobilidadeEAcessibilidade">CIDADE ACESSÍVEL</option>
+                        <option value="1120-PlanejamentoUrbano-DesenvolvimentoUrbano">PLANEJAMENTO URBANO </option>
+                        <option value="1221-EducacaoGestaoEControleAmbiental-MeioAmbiente">EDUCAÇÃO, GESTÃO E CONTROLE AMBIENTAL</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="form-row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Opinião</label>
+                <div class="col-sm-10">
+                    <textarea asp-for="Opiniao" class="form-control" cols="4" rows="3"></textarea>
+                </div>
+            </div>
+        </div>

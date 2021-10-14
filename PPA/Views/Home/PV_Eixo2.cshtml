@@ -1,0 +1,20 @@
+﻿@model OpiniaoViewModel
+<div class="card" >
+            <h5 class="card-header">Desenvolvimento Produtivo</h5>
+            <div class="form-row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Escolha um tema:</label>
+                <div class="col-sm-8">
+                    <select asp-for="Topico" required class="form-select form-control">
+                        <option value="1115-AgriculturaForte-Agricultura">AGRICULTURA FORTE</option>
+                        <option value="1116-EconomiaEmpreendedoraEInovacao-DesenvolvimentoEconomico">ECONOMIA EMPREENDEDORA E INOVAÇÃO</option>
+                        <option value="0005-TurismoSustentavel-Turismo">TURISMO SUSTENTÁVEL</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Opinião</label>
+                <div class="col-sm-10">
+                    <textarea asp-for="Opiniao" class="form-control" cols="4" rows="3"></textarea>
+                </div>
+            </div>
+        </div>

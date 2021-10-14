@@ -1,0 +1,200 @@
+﻿@using PPA.Controllers
+@model OpiniaoViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = Layout;
+}
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>PPA</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <style>
+
+        body{
+            background-color: #0f6674;
+        }
+        .card{
+            width: 85%;
+            margin: auto;
+            padding: 10px;
+            border: 3px solid #0c5460;
+        }
+        .form-row{
+            margin: 5px;
+        }
+        .card-img-top{
+            object-fit: cover;
+        }
+        #logo{
+            width: 40%;
+            height: 40%;
+            text-align: center;
+            margin: auto;
+            padding: 10px;
+        }
+            @@media only screen and (max-width: 600px) {
+                #logo{
+                  width: 80%;
+                  height: 80%;
+                  text-align: center;
+                  margin: auto;
+                  padding: 10px;  
+                }
+            }
+    </style>
+</head>
+<body>
+<div class="text-center">
+    <form asp-action="Finalizar" method="post">
+        <div class="card">
+            <div class="text-center" id="logo">
+                <img src="~/LogoPrefeitura.png" class=" card-img-top img-fluid" alt=""/>
+                </div>
+            <h5 class="card-header">Formulário PPA - Porto Nacional - TO</h5>
+            <div asp-validation-summary="All"></div>
+            <div class="card-body">
+                <div class="form-row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Nome</label>
+                    <div class="col-sm-8">
+                        <input type="text" required asp-for="Nome" class="form-control" id="staticEmail">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">CPF</label>
+                    <div class="col-sm-8">
+                        <input type="text" required asp-for="Cpf" minlength="11" maxlength="11" placeholder="Valores Numéricos" class="form-control" id="cpf">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Telefone</label>
+                    <div class="col-sm-8">
+                        <input type="tel" required asp-for="Telefone" placeholder="Valores Numéricos" class="form-control" id="">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Endereco</label>
+                    <div class="col-sm-8">
+                        <input type="text" required asp-for="Endereco" class="form-control" id="inputEndereco">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">RG</label>
+                    <div class="col-sm-8">
+                        <input type="text" required asp-for="Rg" class="form-control" id="inputRg">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-8">
+                        <input type="email" required asp-for="Email" class="form-control" id="inputRg">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Escolha um eixo temático:</label>
+                    <div class="col-sm-8">
+                        <select asp-for="Eixo" required class="form-select form-control" id="eixo">
+                            <option value="0" selected>Selecione uma opção</option>
+                            <option value="1">DESENVOLVIMENTO DE SOCIAL E HUMANIZAÇÃO</option>
+                            <option value="2">DESENVOLVIMENTO PRODUTIVO</option>
+                            <option value="3">GESTÃO E GOVERNANÇA PARTICIPATIVAS</option>
+                            <option value="4">DESENVOLVIMENTO URBANO E SUSTENTABILIDADE</option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="toChange">
+
+        </div>
+
+        <input type="submit" value="Enviar" class="btn btn-primary btn-lg">
+        <input type="reset" value="Limpar" class="btn btn-secondary btn-lg">
+    </form>
+
+</div>
+
+@section Scripts
+{
+    <script>
+        let urlDefEixo;
+        function init(url)
+        {
+            urlDefEixo = url;
+        }
+        
+        $(document).ready(function() {
+          let url = "@Url.Action(nameof(HomeController.DefinirEixo))";
+          init(url)
+        })
+        
+      
+        $('#eixo').on('change',function() {
+            $.ajax({           
+                url: urlDefEixo,
+                type: "POST",
+                data:{eixo:$('#eixo').val()},
+                success: function(response) {
+                    console.log(response)
+                    $('#toChange').html(response)                   
+                },error: function ()
+                {
+                    alert('Error')    
+                }
+            });
+        });
+        
+        
+        
+        $(function()
+        {
+            //Executa a requisição quando o campo username perder o foco
+            $('#cpf').blur(function()
+            {
+                var cpf = $('#cpf').val().replace(/[^0-9]/g, '').toString();
+        
+                if( cpf.length == 11 )
+                {
+                    var v = [];
+        
+                    //Calcula o primeiro dígito de verificação.
+                    v[0] = 1 * cpf[0] + 2 * cpf[1] + 3 * cpf[2];
+                    v[0] += 4 * cpf[3] + 5 * cpf[4] + 6 * cpf[5];
+                    v[0] += 7 * cpf[6] + 8 * cpf[7] + 9 * cpf[8];
+                    v[0] = v[0] % 11;
+                    v[0] = v[0] % 10;
+        
+                    //Calcula o segundo dígito de verificação.
+                    v[1] = 1 * cpf[1] + 2 * cpf[2] + 3 * cpf[3];
+                    v[1] += 4 * cpf[4] + 5 * cpf[5] + 6 * cpf[6];
+                    v[1] += 7 * cpf[7] + 8 * cpf[8] + 9 * v[0];
+                    v[1] = v[1] % 11;
+                    v[1] = v[1] % 10;
+        
+                    //Retorna Verdadeiro se os dígitos de verificação são os esperados.
+                    if ( (v[0] != cpf[9]) || (v[1] != cpf[10]) )
+                    {
+                        alert('CPF inválido: ' + cpf);
+        
+                        $('#cpf').val('');
+                        //$('#cpf').focus();
+                    }
+                }
+                else
+                {
+                    alert('CPF inválido:' + cpf);
+        
+                    $('#cpf').val('');
+                   // $('#cpf').focus();
+                }
+            });
+        });
+        
+        
+    </script>
+}
+
+
+</body>
